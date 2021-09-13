@@ -63,7 +63,7 @@ class Pelicula {
     releaseDate = json['release_date'];
   }
 
-  getPostImg(){
+  getPosterImg(){
     if(posterPath == null)
       return 'https://www.emsevilla.es/wp-content/uploads/2020/10/no-image-1.png';
     else

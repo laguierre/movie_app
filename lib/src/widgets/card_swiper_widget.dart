@@ -3,7 +3,7 @@ import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:movie_app/src/models/pelicula_model.dart';
 
 class CardSwiper extends StatelessWidget {
-  const CardSwiper({Key key, @required this.peliculas}) : super(key: key);
+  const CardSwiper({@required this.peliculas});
 
   final List<Pelicula> peliculas;
 
@@ -22,9 +22,9 @@ class CardSwiper extends StatelessWidget {
           return ClipRRect(
             borderRadius: BorderRadius.circular(20.0),
             child: FadeInImage(
-              image: NetworkImage(peliculas[index].getPostImg()),
-            placeholder: AssetImage('lib/assets/no-image.jpg'),
-            fit: BoxFit.cover,
+              image: NetworkImage(peliculas[index].getPosterImg()),
+              placeholder: AssetImage('lib/assets/no-image.jpg'),
+              fit: BoxFit.cover,
             ),
           );
         },
