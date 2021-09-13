@@ -69,5 +69,11 @@ class Pelicula {
     else
       return 'https://image.tmdb.org/t/p/w500/$posterPath';
   }
+  getBeckgroundImg(){
+    if(posterPath == null)
+      return 'https://www.emsevilla.es/wp-content/uploads/2020/10/no-image-1.png';
+    else
+      return 'https://image.tmdb.org/t/p/w500/$backdropPath';
+  }
 
 }

@@ -10,6 +10,7 @@ class PeliculasProvider {
   String _url = 'api.themoviedb.org';
   String _language = 'es-ES';
   int _popularesPage = 0;
+  bool _cargando = false;
 
   List<Pelicula> _populares;
   final _popularesStreamController = StreamController<List<Pelicula>>.broadcast();
@@ -37,6 +38,8 @@ class PeliculasProvider {
   }
 
   Future<List<Pelicula>> getPolulares() async {
+    if(_cargando) return [];
+    _cargando = true;
     _popularesPage++;
     final url = Uri.http(_url, '3/movie/popular', {
       'api_key': _apiKey,
@@ -47,6 +50,7 @@ class PeliculasProvider {
     final resp = await _procesarRespuesta(url);
     _populares.addAll(resp);
     popularesSink(_populares);
+    _cargando = false;
     return resp;
   }
 }
