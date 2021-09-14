@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:movie_app/src/provider/peliculas_provider.dart';
+import 'package:movie_app/src/search/search_delegate.dart';
 import 'package:movie_app/src/widgets/card_swiper_widget.dart';
 import 'package:movie_app/src/widgets/movie_horizontal.dart';
 
@@ -10,20 +11,33 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     peliculasProvider.getPolulares();
-    return Scaffold(
-      appBar: AppBar(
-        centerTitle: false,
-        title: Text('Películas en cines'),
-        backgroundColor: Colors.indigoAccent,
-        actions: [IconButton(onPressed: () {}, icon: Icon(Icons.search))],
-      ),
-      body: Container(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            _swiperTarjetas(),
-            _footer(context),
+    return SafeArea(
+      child: Scaffold(
+        appBar: AppBar(
+          centerTitle: false,
+          title: Text('Películas en cines'),
+          backgroundColor: Colors.indigoAccent,
+          actions: <Widget>[
+            IconButton(
+              icon: Icon(Icons.search),
+              onPressed: () {
+                showSearch(
+                  context: context,
+                  delegate: DataSearch(),
+                  //query: 'Búsqueda',
+                );
+              },
+            )
           ],
+        ),
+        body: Container(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: <Widget>[
+              _swiperTarjetas(),
+              _footer(context),
+            ],
+          ),
         ),
       ),
     );
@@ -42,10 +56,6 @@ class HomePage extends StatelessWidget {
             );
           }
         });
-
-    /*
-    peliculasProvider.getEnCines();
-    return CardSwiper(peliculas: [1,2,3,4,5]);*/
   }
 
   Widget _footer(BuildContext context) {
@@ -53,7 +63,7 @@ class HomePage extends StatelessWidget {
       width: double.infinity,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
+        children: <Widget>[
           Container(
               padding: EdgeInsets.only(left: 20.0),
               child: Text('Populares',
@@ -63,7 +73,10 @@ class HomePage extends StatelessWidget {
               stream: peliculasProvider.popularesStream,
               builder: (BuildContext context, AsyncSnapshot<List> snapshot) {
                 if (snapshot.hasData)
-                  return MovieHorizontal(peliculas: snapshot.data, siguientePagina: peliculasProvider.getPolulares, );
+                  return MovieHorizontal(
+                    peliculas: snapshot.data,
+                    siguientePagina: peliculasProvider.getPolulares,
+                  );
                 else
                   return Center(child: CircularProgressIndicator());
               })

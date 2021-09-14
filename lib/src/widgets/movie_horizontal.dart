@@ -1,10 +1,9 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:movie_app/src/models/pelicula_model.dart';
 
 class MovieHorizontal extends StatelessWidget {
-  MovieHorizontal(
-      {Key key, @required this.peliculas, @required this.siguientePagina})
-      : super(key: key);
+  MovieHorizontal({@required this.peliculas, @required this.siguientePagina});
 
   final List<Pelicula> peliculas;
   final Function siguientePagina;
@@ -28,23 +27,28 @@ class MovieHorizontal extends StatelessWidget {
           itemCount: peliculas.length,
           pageSnapping: false,
           controller: _pageController,
-          //children: _tarjetas(context),
           itemBuilder: (context, i) => _tarjeta(context, peliculas[i]),
         ));
   }
 
+  ///Tarjeta inferior///
   Widget _tarjeta(BuildContext context, Pelicula pelicula) {
+    pelicula.uniqueId = '${pelicula.id}-poster';
+    var size = MediaQuery.of(context).size;
     final tarjeta = Container(
-      margin: EdgeInsets.only(right: 5.0),
+      margin: EdgeInsets.only(right: 15.0),
       child: Column(
-        children: [
-          ClipRRect(
-            borderRadius: BorderRadius.circular(20.0),
-            child: FadeInImage(
-                height: 160,
-                fit: BoxFit.cover,
-                placeholder: AssetImage('lib/assets/no-image.jpg'),
-                image: NetworkImage(pelicula.getPosterImg())),
+        children: <Widget>[
+          Hero(
+            tag: pelicula.uniqueId,
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(15.0),
+              child: FadeInImage(
+                  height: size.height * 0.17,
+                  fit: BoxFit.cover,
+                  placeholder: AssetImage('lib/assets/no-image.jpg'),
+                  image: NetworkImage(pelicula.getPosterImg())),
+            ),
           ),
           SizedBox(height: 5.0),
           Text(
@@ -63,7 +67,30 @@ class MovieHorizontal extends StatelessWidget {
     );
   }
 
-  List<Widget> _tarjetas(BuildContext context) {
-    return peliculas.map((pelicula) {}).toList();
-  }
+/*List<Widget> _tarjetas(BuildContext context) {
+    return peliculas.map((pelicula) {
+      return Container(
+        margin: EdgeInsets.only(right: 15.0),
+        child: Column(
+          children: <Widget>[
+            ClipRRect(
+              borderRadius: BorderRadius.circular(20.0),
+              child: FadeInImage(
+                image: NetworkImage(pelicula.getPosterImg()),
+                placeholder: AssetImage('assets/img/no-image.jpg'),
+                fit: BoxFit.cover,
+                height: 160.0,
+              ),
+            ),
+            SizedBox(height: 5.0),
+            Text(
+              pelicula.title,
+              overflow: TextOverflow.ellipsis,
+              style: Theme.of(context).textTheme.caption,
+            )
+          ],
+        ),
+      );
+    }).toList();
+  }*/
 }
