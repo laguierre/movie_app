@@ -22,7 +22,7 @@ class MovieHorizontal extends StatelessWidget {
       }
     });
     return Container(
-        height: size.height * 0.2,
+        height: size.height * 0.25,
         child: PageView.builder(
           itemCount: peliculas.length,
           pageSnapping: false,
