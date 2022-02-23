@@ -1,16 +1,23 @@
-# movie_app
+# Movie Flutter APP
 
-A new Flutter project.
+Flutter APP Movie usiing api.themoviedb.org API.
 
-## Getting Started
+## General Info
 
-This project is a starting point for a Flutter application.
+**Packages used:**
 
-A few resources to get you started if this is your first Flutter project:
+- http: ^0.13.4 [link](https://pub.dev/packages/http)
+- flutter_swiper: [link](https://pub.dev/packages/flutter_swiper)
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+## GIF
+<p align="center">
+<img src="screenshots/untitled.gif" height="700">
+</p>
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Screenshots
+<p align="center">
+<img src="screenshots/Screenshot_1645573434.png" height="700">
+<img src="screenshots/Screenshot_1645573441.png" height="700">
+<img src="screenshots/Screenshot_1645573451.png" height="700">
+<img src="screenshots/Screenshot_1645573464.png" height="700"> 
+</p>
